@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\DebugController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,12 @@ Route::get('/landing', function () {
 
 Route::get('/privacy', [LegalController::class, 'privacy']);
 Route::get('/tos', [LegalController::class, 'tos']);
+
+//Route::group();
+Route::post('/admin/season/create');
+
+//=== DEBUG ===//
+Route::get('/xyz', [DebugController::class, 'xyz']);
 
 //===SAMPLE ROUTE===//
 //Route::get('/route', function () {

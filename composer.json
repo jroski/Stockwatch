@@ -20,6 +20,7 @@
         "socialiteproviders/reddit": "^3.0",
         "socialiteproviders/twitch": "^5.1",
         "socialiteproviders/twitter": "^3.0",
+        "spatie/laravel-permission": "^3.7",
         "tbirrell/laravel-model-directory": "dev-master"
     },
     "require-dev": {
