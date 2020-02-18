@@ -13,7 +13,6 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// something is wrong here
 Route::get('/landing', function () {
     return view('landing');
 });
@@ -26,6 +25,8 @@ Route::post('/admin/season/create');
 
 //=== DEBUG ===//
 Route::get('/xyz', [DebugController::class, 'xyz']);
+Route::get('/debug/showme/{blade}', [DebugController::class, 'showme'])->where('route', '.*');
+
 
 //===SAMPLE ROUTE===//
 //Route::get('/route', function () {
