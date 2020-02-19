@@ -35,8 +35,7 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('per
 
 //=== DEBUG ===//
 Route::get('/xyz', [DebugController::class, 'xyz']);
-Route::get('/debug/showme/{blade}', [DebugController::class, 'showme'])->where('route', '.*');
-
+Route::get('/debug/showme/{blade}', [DebugController::class, 'showme'])->where('blade', '.*');
 
 //===SAMPLE ROUTE===//
 //Route::get('/route', function () {
