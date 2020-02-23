@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Role extends BaseModel
+class Price extends BaseModel
 {
     //
 }

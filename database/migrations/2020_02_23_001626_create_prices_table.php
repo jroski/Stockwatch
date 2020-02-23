@@ -26,7 +26,8 @@ class CreatePricesTable extends Migration
         });
 
         Schema::table('transactions', function (Blueprint $table) {
-           $table->dropColumn('amount', 'quantity');
+           $table->dropColumn('amount');
+           $table->unsignedInteger('quantity');
         });
     }
 
