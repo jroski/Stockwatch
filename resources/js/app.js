@@ -16,10 +16,10 @@ Vue.use(VueTailwind)
 // not a huge fan of this global import situation, maybe this should be scoped to components (I tried and failed)
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faStar, faArrowUp, faBars } from '@fortawesome/free-solid-svg-icons'
-import { faTwitch, faTwitter, faDiscord, faFacebook, faReddit } from '@fortawesome/free-brands-svg-icons'
+import { faStar, faArrowUp, faBars, faColumns, faAward, faHistory, faUserCircle, faUserShield, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTwitch, faTwitter, faDiscord, faFacebookF, faReddit } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faStar, faArrowUp, faBars, faTwitch, faTwitter, faDiscord, faFacebook, faReddit)
+library.add(faStar, faArrowUp, faBars, faColumns, faTwitch, faTwitter, faDiscord, faFacebookF, faReddit, faAward, faHistory, faUserCircle, faUserShield, faSignOutAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -50,11 +50,19 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 const app = new Vue({
     el: '#app',
-    // local registration, I think?
-    // components: {
-    //     StockCard,
-    //     StockCardList,
-    //     Slideout
-    // }
+    data: {
+        isActive: true
+    },
+    mounted() {
+      if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+          //then this is a mobile device
+          this.isActive = false;
+      }
+    },
+    methods: {
+        toggleNavbar: function(event){
+           this.isActive = !this.isActive;
+        }
+    }
 });
 

@@ -19,65 +19,104 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="content">
-    <div id="app">
-        <div>
-            <slideout-nav></slideout-nav>
-            <nav id="menu" class="">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+<body>
+    <div id="app" class="app-wrapper">
+        <aside>
+            <button class="button-base toggle" @click="toggleNavbar()" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <font-awesome-icon icon="bars" size="lg" />
+            </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
-                        </ul>
+            <a class="logo" v-bind:class="[isActive ? 'full' : 'mini']" href="{{ url('/') }}">
+                {{ config('app.name', 'Stock Watch') }}
+            </a>
+        </aside>
+        <header>
+        </header>
+        <!-- <slideout-nav></slideout-nav> -->
+        <nav id="menu" role="navigation" class="sidebar-nav" v-bind:class="[isActive ? 'open' : 'closed']">
+            @guest
+                <p>need to fix this logged in check</p>
+            @else
+                <div class="profile-wrap">
+                    <img src="{{ asset('/storage/avatar-default.svg') }}" alt="Profile image" class="profile-pic" />
+                    <div class="profile-name">
+                        <span>{{ Auth::user()->name }}</span>
+                        <span>@RobotKatie</span>
                     </div>
                 </div>
-            </nav>
-            <main id="panel" class="p-4">
-                <button class="toggle-button"><font-awesome-icon icon="bars" /></button>
-                @yield('content')
-            </main>
-        </div>
+            @endguest
+
+            <ul class="sidebar-nav-list">
+            <li>
+                <a href="/" class="item-wrap">
+                    <figure>
+                        <font-awesome-icon icon="columns" fixed-width />
+                    </figure>
+                    <span v-bind:class="[isActive ? 'full' : 'mini']">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" class="item-wrap">
+                    <figure>
+                        <font-awesome-icon icon="award" fixed-width />
+                    </figure>
+                    <span v-bind:class="[isActive ? 'full' : 'mini']">Leaderboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" class="item-wrap">
+                    <figure>
+                        <font-awesome-icon icon="history" fixed-width />
+                    </figure>
+                    <span v-bind:class="[isActive ? 'full' : 'mini']">History</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" class="item-wrap">
+                    <figure>
+                        <font-awesome-icon icon="user-circle" fixed-width />
+                    </figure>
+                    <span v-bind:class="[isActive ? 'full' : 'mini']">Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" class="item-wrap">
+                    <figure>
+                        <font-awesome-icon icon="user-shield" fixed-width />
+                    </figure>
+                    <span v-bind:class="[isActive ? 'full' : 'mini']">Admin</span>
+                </a>
+            </li>
+            @guest
+                <li>
+                    <a class="item-wrap" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                    <li>
+                        <a class="item-wrap" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li>
+                    <a class="item-wrap" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <figure>
+                    <font-awesome-icon icon="sign-out-alt" fixed-width />
+                    </figure>
+                        <span v-bind:class="[isActive ? 'full' : 'mini']">{{ __('Logout') }}</span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            @endguest
+        </nav>
+        <main id="panel" class="app-content">
+            @yield('content')
+        </main>
+        <footer>feets</footer>
     </div>
 </body>
 </html>
