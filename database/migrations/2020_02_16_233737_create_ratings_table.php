@@ -15,9 +15,15 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
+<<<<<<< Updated upstream
             $table->string('rater')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('score');
+=======
+            $table->integer('user_id');
+            $table->integer('week');
+            $table->integer('rating');
+>>>>>>> Stashed changes
             $table->timestamps();
         });
     }
