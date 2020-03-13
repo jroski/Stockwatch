@@ -41,4 +41,10 @@ class Houseguest extends Resource
             HasMany::make('Ratings')
         ];
     }
+    public function cards(Request $request)
+    {
+        return [
+            (new Metrics\IndividualStockCount)->onlyOnDetail()
+        ];
+    }
 }
